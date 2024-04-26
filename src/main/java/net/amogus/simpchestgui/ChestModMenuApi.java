@@ -5,19 +5,19 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 
 import me.shedaniel.autoconfig.AutoConfig;
 
-public final class ChestEspModMenuApi implements ModMenuApi
+public final class ChestModMenuApi implements ModMenuApi
 {
 	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory()
 	{
 		return parent -> AutoConfig
-			.getConfigScreen(ChestEspConfig.class, parent).get();
+			.getConfigScreen(ChestConfig.class, parent).get();
 	}
 }

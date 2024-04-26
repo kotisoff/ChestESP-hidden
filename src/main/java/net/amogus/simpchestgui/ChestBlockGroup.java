@@ -5,12 +5,13 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
 
 import me.shedaniel.autoconfig.ConfigHolder;
+import net.amogus.simpchestgui.util.BlockUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -18,12 +19,11 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.wimods.chestesp.util.BlockUtils;
 
-public final class ChestEspBlockGroup extends ChestEspGroup
+public final class ChestBlockGroup extends ChestGroup
 {
-	public ChestEspBlockGroup(ConfigHolder<ChestEspConfig> configHolder,
-		ToIntFunction<ChestEspConfig> color, Predicate<ChestEspConfig> enabled)
+	public ChestBlockGroup(ConfigHolder<ChestConfig> configHolder,
+						   ToIntFunction<ChestConfig> color, Predicate<ChestConfig> enabled)
 	{
 		super(configHolder, color, enabled);
 	}

@@ -5,22 +5,22 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler.EnumDisplayOption;
 
-@Config(name = "chestesp")
-public final class ChestEspConfig implements ConfigData
+@Config(name = "simpchestgui")
+public final class ChestConfig implements ConfigData
 {
 	@ConfigEntry.Gui.Tooltip
 	public boolean enable = true;
 	
 	@ConfigEntry.Gui.EnumHandler(option = EnumDisplayOption.BUTTON)
 	@ConfigEntry.Gui.Tooltip
-	public ChestEspStyle style = ChestEspStyle.BOXES;
+	public ChestStyle style = ChestStyle.BOXES;
 	
 	@ConfigEntry.ColorPicker
 	@ConfigEntry.Gui.Tooltip

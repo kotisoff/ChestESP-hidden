@@ -5,8 +5,10 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
+import net.amogus.simpchestgui.util.RenderUtils;
+import net.amogus.simpchestgui.util.RotationUtils;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -21,10 +23,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.wimods.chestesp.util.RenderUtils;
-import net.wimods.chestesp.util.RotationUtils;
 
-public final class ChestEspRenderer
+public final class ChestRenderer
 {
 	private static VertexBuffer solidBox;
 	private static VertexBuffer outlinedBox;
@@ -34,7 +34,7 @@ public final class ChestEspRenderer
 	private final int regionZ;
 	private final Vec3d start;
 	
-	public ChestEspRenderer(MatrixStack matrixStack)
+	public ChestRenderer(MatrixStack matrixStack)
 	{
 		this.matrixStack = matrixStack;
 		
@@ -46,7 +46,7 @@ public final class ChestEspRenderer
 			.subtract(regionX, 0, regionZ);
 	}
 	
-	public void renderBoxes(ChestEspGroup group)
+	public void renderBoxes(ChestGroup group)
 	{
 		float[] colorF = group.getColorF();
 		
@@ -78,7 +78,7 @@ public final class ChestEspRenderer
 		}
 	}
 	
-	public void renderLines(ChestEspGroup group)
+	public void renderLines(ChestGroup group)
 	{
 		Matrix4f matrix = matrixStack.peek().getPositionMatrix();
 		Tessellator tessellator = RenderSystem.renderThreadTesselator();

@@ -5,7 +5,7 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,21 +17,21 @@ import java.util.function.ToIntFunction;
 import me.shedaniel.autoconfig.ConfigHolder;
 import net.minecraft.util.math.Box;
 
-public abstract class ChestEspGroup
+public abstract class ChestGroup
 {
-	private final ConfigHolder<ChestEspConfig> configHolder;
-	private final ToIntFunction<ChestEspConfig> color;
-	private final Predicate<ChestEspConfig> enabled;
+	private final ConfigHolder<ChestConfig> configHolder;
+	private final ToIntFunction<ChestConfig> color;
+	private final Predicate<ChestConfig> enabled;
 	
 	protected final ArrayList<Box> boxes = new ArrayList<>();
 	
 	/**
-	 * Creates a new ChestEspGroup controlled by the given settings. If
+	 * Creates a new ChestGroup controlled by the given settings. If
 	 * <code>enabled</code> is <code>null</code>, the group will always be
 	 * enabled.
 	 */
-	public ChestEspGroup(ConfigHolder<ChestEspConfig> configHolder,
-		ToIntFunction<ChestEspConfig> color, Predicate<ChestEspConfig> enabled)
+	public ChestGroup(ConfigHolder<ChestConfig> configHolder,
+					  ToIntFunction<ChestConfig> color, Predicate<ChestConfig> enabled)
 	{
 		this.configHolder = Objects.requireNonNull(configHolder);
 		this.color = Objects.requireNonNull(color);

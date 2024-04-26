@@ -5,8 +5,10 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
+import net.amogus.simpchestgui.util.ChunkUtils;
+import net.amogus.simpchestgui.util.RenderUtils;
 import org.lwjgl.opengl.GL11;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +30,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.entity.vehicle.ChestMinecartEntity;
 import net.minecraft.entity.vehicle.HopperMinecartEntity;
-import net.wimods.chestesp.util.ChunkUtils;
-import net.wimods.chestesp.util.RenderUtils;
 
-public final class ChestEspMod
+public final class ChestMod
 {
 	private static final MinecraftClient MC = MinecraftClient.getInstance();
 	
@@ -40,20 +40,20 @@ public final class ChestEspMod
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("ChestESP");
 	
-	private final ConfigHolder<ChestEspConfig> configHolder;
-	private final ChestEspGroupManager groups;
+	private final ConfigHolder<ChestConfig> configHolder;
+	private final ChestGroupManager groups;
 	private final KeyBinding toggleKey;
 	
 	private boolean enabled;
 	
-	public ChestEspMod()
+	public ChestMod()
 	{
 		LOGGER.info("Starting ChestESP...");
 		
-		configHolder = AutoConfig.register(ChestEspConfig.class,
+		configHolder = AutoConfig.register(ChestConfig.class,
 			GsonConfigSerializer::new);
 		
-		groups = new ChestEspGroupManager(configHolder);
+		groups = new ChestGroupManager(configHolder);
 		
 		toggleKey = KeyBindingHelper
 			.registerKeyBinding(new KeyBinding("key.chestesp.toggle",
@@ -76,11 +76,11 @@ public final class ChestEspMod
 		this.enabled = enabled;
 		
 		if(enabled)
-			ChestEspRenderer.prepareBuffers();
+			ChestRenderer.prepareBuffers();
 		else
 		{
-			groups.allGroups.forEach(ChestEspGroup::clear);
-			ChestEspRenderer.closeBuffers();
+			groups.allGroups.forEach(ChestGroup::clear);
+			ChestRenderer.closeBuffers();
 		}
 		
 		if(configHolder.get().enable != enabled)
@@ -96,7 +96,7 @@ public final class ChestEspMod
 		if(!isEnabled())
 			return;
 		
-		groups.allGroups.forEach(ChestEspGroup::clear);
+		groups.allGroups.forEach(ChestGroup::clear);
 		
 		ChunkUtils.getLoadedBlockEntities().forEach(blockEntity -> {
 			if(blockEntity instanceof TrappedChestBlockEntity)
@@ -145,23 +145,23 @@ public final class ChestEspMod
 		matrixStack.push();
 		RenderUtils.applyRegionalRenderOffset(matrixStack);
 		
-		groups.entityGroups.stream().filter(ChestEspGroup::isEnabled)
+		groups.entityGroups.stream().filter(ChestGroup::isEnabled)
 			.forEach(g -> g.updateBoxes(partialTicks));
 		
-		ChestEspRenderer espRenderer = new ChestEspRenderer(matrixStack);
-		ChestEspStyle style = configHolder.get().style;
+		ChestRenderer espRenderer = new ChestRenderer(matrixStack);
+		ChestStyle style = configHolder.get().style;
 		
 		if(style.hasBoxes())
 		{
 			RenderSystem.setShader(GameRenderer::getPositionProgram);
-			groups.allGroups.stream().filter(ChestEspGroup::isEnabled)
+			groups.allGroups.stream().filter(ChestGroup::isEnabled)
 				.forEach(espRenderer::renderBoxes);
 		}
 		
 		if(style.hasLines())
 		{
 			RenderSystem.setShader(GameRenderer::getPositionProgram);
-			groups.allGroups.stream().filter(ChestEspGroup::isEnabled)
+			groups.allGroups.stream().filter(ChestGroup::isEnabled)
 				.forEach(espRenderer::renderLines);
 		}
 		
@@ -174,9 +174,9 @@ public final class ChestEspMod
 		GL11.glDisable(GL11.GL_LINE_SMOOTH);
 	}
 	
-	public static ChestEspMod getInstance()
+	public static ChestMod getInstance()
 	{
-		return ChestEspModInitializer.getInstance();
+		return ChestModInitializer.getInstance();
 	}
 	
 	public boolean isEnabled()
@@ -184,7 +184,7 @@ public final class ChestEspMod
 		return enabled;
 	}
 	
-	public ConfigHolder<ChestEspConfig> getConfigHolder()
+	public ConfigHolder<ChestConfig> getConfigHolder()
 	{
 		return configHolder;
 	}

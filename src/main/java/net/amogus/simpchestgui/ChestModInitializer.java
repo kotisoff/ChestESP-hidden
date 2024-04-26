@@ -5,13 +5,13 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
 import net.fabricmc.api.ModInitializer;
 
-public final class ChestEspModInitializer implements ModInitializer
+public final class ChestModInitializer implements ModInitializer
 {
-	private static ChestEspMod instance;
+	private static ChestMod instance;
 	
 	@Override
 	public void onInitialize()
@@ -21,12 +21,12 @@ public final class ChestEspModInitializer implements ModInitializer
 		// Proceed with mild caution.
 		
 		if(instance != null)
-			throw new RuntimeException("ChestEspMod.onInitialize() ran twice!");
+			throw new RuntimeException("SimpleChestGui.onInitialize() ran twice!");
 		
-		instance = new ChestEspMod();
+		instance = new ChestMod();
 	}
 	
-	public static ChestEspMod getInstance()
+	public static ChestMod getInstance()
 	{
 		return instance;
 	}

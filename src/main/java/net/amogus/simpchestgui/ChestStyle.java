@@ -5,9 +5,9 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
-public enum ChestEspStyle
+public enum ChestStyle
 {
 	BOXES(true, false),
 	LINES(false, true),
@@ -16,7 +16,7 @@ public enum ChestEspStyle
 	private final boolean boxes;
 	private final boolean lines;
 	
-	private ChestEspStyle(boolean boxes, boolean lines)
+	private ChestStyle(boolean boxes, boolean lines)
 	{
 		this.boxes = boxes;
 		this.lines = lines;
@@ -35,6 +35,6 @@ public enum ChestEspStyle
 	@Override
 	public String toString()
 	{
-		return "text.autoconfig.chestesp.option.style." + name().toLowerCase();
+		return "text.autoconfig.simpchestgui.option.style." + name().toLowerCase();
 	}
 }

@@ -5,7 +5,7 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp.mixin;
+package net.amogus.simpchestgui.mixin;
 
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.resource.SynchronousResourceReloader;
-import net.wimods.chestesp.ChestEspMod;
+import net.amogus.simpchestgui.ChestMod;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin
@@ -32,7 +32,7 @@ public abstract class GameRendererMixin
 	private void onRenderWorldViewBobbing(float tickDelta, long limitTime,
 		MatrixStack matrices, CallbackInfo ci)
 	{
-		ChestEspMod chestEsp = ChestEspMod.getInstance();
+		ChestMod chestEsp = ChestMod.getInstance();
 		
 		if(chestEsp != null && chestEsp.isEnabled())
 			cancelNextBobView = chestEsp.shouldCancelViewBobbing();
@@ -68,7 +68,7 @@ public abstract class GameRendererMixin
 	private void onRenderWorld(float partialTicks, long finishTimeNano,
 		MatrixStack matrixStack, CallbackInfo ci)
 	{
-		ChestEspMod chestEsp = ChestEspMod.getInstance();
+		ChestMod chestEsp = ChestMod.getInstance();
 		
 		if(chestEsp != null && chestEsp.isEnabled())
 			chestEsp.onRender(matrixStack, partialTicks);

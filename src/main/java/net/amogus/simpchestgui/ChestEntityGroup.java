@@ -5,7 +5,7 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp;
+package net.amogus.simpchestgui;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -14,12 +14,12 @@ import java.util.function.ToIntFunction;
 import me.shedaniel.autoconfig.ConfigHolder;
 import net.minecraft.entity.Entity;
 
-public final class ChestEspEntityGroup extends ChestEspGroup
+public final class ChestEntityGroup extends ChestGroup
 {
 	private final ArrayList<Entity> entities = new ArrayList<>();
 	
-	public ChestEspEntityGroup(ConfigHolder<ChestEspConfig> configHolder,
-		ToIntFunction<ChestEspConfig> color, Predicate<ChestEspConfig> enabled)
+	public ChestEntityGroup(ConfigHolder<ChestConfig> configHolder,
+							ToIntFunction<ChestConfig> color, Predicate<ChestConfig> enabled)
 	{
 		super(configHolder, color, enabled);
 	}

@@ -6,8 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "ClientPlayerEntityMixin",
-    "GameRendererMixin"
+    "net.amogus.simpchestgui.mixin.ClientPlayerEntityMixin",
+    "net.amogus.simpchestgui.mixin.GameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

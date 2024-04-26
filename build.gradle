@@ -133,29 +133,3 @@ task moveDevLibs(dependsOn: [remapJar, remapSourcesJar]) {
 		ant.move(file:"${project.buildDir}/devlibs/${archivesBaseName}-${version}-sources.jar", tofile:"${project.buildDir}/libs/${archivesBaseName}-${version}-sources-dev.jar")
 	}
 }
-
-import org.kohsuke.github.GHReleaseBuilder
-import org.kohsuke.github.GitHub
-
-task github(dependsOn: moveDevLibs) {
-	onlyIf {
-		ENV.GITHUB_TOKEN
-	}
-
-	doLast {
-		def github = GitHub.connectUsingOAuth(ENV.GITHUB_TOKEN as String)
-		def repository = github.getRepository("Wurst-Imperium-MCX/ChestESP")
-		def ghVersion = "v" + version.substring(0, version.indexOf("-"))
-
-		def ghRelease = repository.getReleaseByTagName(ghVersion as String);
-		if(ghRelease == null) {
-			def releaseBuilder = new GHReleaseBuilder(repository, ghVersion as String)
-			ghRelease = releaseBuilder.create()
-		}
-
-		ghRelease.uploadAsset(remapJar.archiveFile.get().getAsFile(), "application/java-archive");
-		ghRelease.uploadAsset(remapSourcesJar.archiveFile.get().getAsFile(), "application/java-archive")
-		ghRelease.uploadAsset(new File("${project.buildDir}/libs/${archivesBaseName}-${version}-dev.jar"), "application/java-archive")
-		ghRelease.uploadAsset(new File("${project.buildDir}/libs/${archivesBaseName}-${version}-sources-dev.jar"), "application/java-archive")
-	}
-}

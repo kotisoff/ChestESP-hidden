@@ -5,7 +5,7 @@
  * License, version 3. If a copy of the GPL was not distributed with this
  * file, You can obtain one at: https://www.gnu.org/licenses/gpl-3.0.txt
  */
-package net.wimods.chestesp.mixin;
+package net.amogus.simpchestgui.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,13 +17,13 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.wimods.chestesp.ChestEspMod;
+import net.amogus.simpchestgui.ChestMod;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 {
-	public ClientPlayerEntityMixin(ChestEspMod chestEspMod, ClientWorld world,
-		GameProfile profile)
+	public ClientPlayerEntityMixin(ChestMod chestMod, ClientWorld world,
+								   GameProfile profile)
 	{
 		super(world, profile);
 	}
@@ -33,7 +33,7 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 		ordinal = 0), method = "tick()V")
 	private void onTick(CallbackInfo ci)
 	{
-		ChestEspMod chestEsp = ChestEspMod.getInstance();
+		ChestMod chestEsp = ChestMod.getInstance();
 		if(chestEsp == null)
 			return;
 		
